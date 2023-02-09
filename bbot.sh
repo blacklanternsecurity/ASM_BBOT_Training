@@ -56,11 +56,11 @@ pip install ansible
 
 # ============ BLSOPS ANSIBLE REPOSITORY ============
 
-ANS_R="https://github.com/blacklanternsecurity/ASM_BBOT_Training/archive/refs/heads/main.tar.gz"
-ANS_L="~/ASM-BBOT-Training/"
+ANS_R="https://github.com/blacklanternsecurity/ASM_BBOT_Training/archive/refs/heads/master.tar.gz"
+ANS_L=~/ASM_BBOT_Training-master
 
 mkdir -p "${ANS_L}"
-wget -qO- "${ANS_R}" | tar xzC "${ANS_L}"
+wget -qO- "${ANS_R}" | tar xzC ~
 
 # ============ READ AWS CREDENTIALS ============
 
