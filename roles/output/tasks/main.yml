@@ -2,6 +2,7 @@
 - name: Generate output document
   delegate_to: localhost
   delegate_facts: no
+  become: false
   vars:
     tf: "{{ playbook_dir }}/tf/"
   template:
