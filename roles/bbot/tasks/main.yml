@@ -1,0 +1,18 @@
+---
+- name: Install apt dependencies
+  package:
+    name:
+      - python3-pip
+    state: latest
+    update_cache: yes
+
+# This is separate from the pip task that follows to limit
+# potential for a deadlock on CPU-limited EC2 instances
+- name: Install pip dependencies
+  pip:
+    name: "ansible=={{ ansible_vers }}"
+
+- name: Install BBOT Python module
+  tags: point
+  pip:
+    name: "bbot"

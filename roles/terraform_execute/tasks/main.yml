@@ -1,0 +1,50 @@
+---
+# [-] REFERENCES
+# 1. https://www.redhat.com/sysadmin/ansible-dynamic-inventory-python
+# 2. https://belgium.devoteam.com/blog/ansible-and-terraform-episode-3/
+# 3. https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04
+
+# Instantiate EC2 instance
+# Return EC2 IP
+
+#Create a key pair and store the private/public output into "keyResults"
+- name: "Generate SSH keypair"
+  user:
+    name: "{{ ansible_facts.user_id }}"
+    generate_ssh_key: yes
+    ssh_key_type: rsa
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/bbotTraining
+  register: keyResults
+
+
+#Assign the CONTENTS of the public key to the Ansible "public_key" variable
+- name:
+  set_fact:
+    public_key: "{{ keyResults.ssh_public_key }}"
+
+
+#Write Ansible "public_key" contents out to the env.tfars file
+#This file can now be used to plan and apply the contents of the terraform .tf file
+- name: Substitute tfvars
+  template:
+    src: terraform.tfvars.j2
+    dest: "{{ playbook_dir }}/tf/env.tfvars"
+
+
+#Save Terraform working directory
+- name: Save Terraform working directory
+  tags:
+    - always
+  set_fact:
+    terraform_dir: "{{ playbook_dir }}/tf/"
+
+# Execute Terraform plan and apply
+- name: Initialize and Execute Terraform
+  community.general.terraform:
+    project_path: "{{ terraform_dir }}"
+    variables_file: "{{ playbook_dir }}/tf/env.tfvars"
+    state: "present"
+    force_init: true
+  tags:
+    - terraform

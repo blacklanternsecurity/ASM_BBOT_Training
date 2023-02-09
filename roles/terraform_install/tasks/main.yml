@@ -1,0 +1,22 @@
+---
+# Using uri module + python's ziptool to avoid introducing unzip dependency
+- name: Download Terraform archive
+  get_url:
+    url: "{{ terraform_url }}"
+    dest: /tmp/terraform.zip
+    checksum: "sha256:{{ terraform_hash }}"
+
+- name: Unpack Terraform binary
+  shell:
+    cmd: "/usr/bin/python3 -m zipfile -e /tmp/terraform.zip ~/.local/bin/"
+    creates: "~/.local/bin/terraform"
+
+- name: Set permissions on Terraform binary
+  file:
+    path: "~/.local/bin/terraform"
+    mode: 0755
+
+- name: Set executable permissions on inventory script
+  ansible.builtin.file:
+    path: "{{ playbook_dir }}/inventory/parse-tfstate.py"
+    mode: '0755'

@@ -1,0 +1,20 @@
+---
+- name: Generate output document
+  delegate_to: localhost
+  delegate_facts: no
+  vars:
+    tf: "{{ playbook_dir }}/tf/"
+  template:
+    src: "readme.j2"
+    dest: "{{ playbook_dir }}/{{ output_file }}"
+
+- name: Provisioned successfully
+  delegate_to: localhost
+  delegate_facts: no
+  vars:
+    output_lines: |
+      {{ lookup("file", "{{ playbook_dir }}/{{ output_file }}") }}
+
+      This information can also be found in {{ playbook_dir }}/{{ output_file }}
+  debug:
+    msg: "{{ output_lines.split('\n') }}"

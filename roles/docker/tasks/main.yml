@@ -1,0 +1,51 @@
+---
+- name: Install dependencies
+  package:
+    name: [ "apt-transport-https", "ca-certificates", "curl", 
+            "software-properties-common", "python3-pip", 
+            "virtualenv", "python3-setuptools" ]
+    state: latest
+    update_cache: yes
+  register: ubuntu_packages
+  retries: 60
+  delay: 10
+  until: ubuntu_packages is succeeded
+
+
+- name: Store Docker package names
+  set_fact:
+    docker_packages: [ "docker-ce", "containerd.io", "libseccomp2", "docker-compose" ]
+
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+
+- name: Install Docker
+  package:
+    name: "{{ docker_packages }}"
+    state: present
+    update_cache: yes
+  register: docker_packages
+  retries: 60
+  delay: 10
+  until: docker_packages is succeeded
+
+
+- name: Install Required Python modules
+  pip: 
+    name: [ "docker", "docker-compose", "botocore", "boto3" ]
+
+
+- name: Start Docker service
+  service: 
+    name: docker
+    state: started

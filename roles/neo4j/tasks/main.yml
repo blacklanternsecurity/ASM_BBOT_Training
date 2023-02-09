@@ -1,0 +1,23 @@
+---
+- name: Create neo4j dir
+  file:
+    path: "{{ neo4j_root }}"
+    state: directory
+
+
+- name: Create a NEO4J container
+  docker_container:
+    name: neo4j
+    image: neo4j:latest
+    state: started
+    recreate: no
+    published_ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - "{{ neo4j_root }}/data:/data"
+      - "{{ neo4j_root }}/logs:/logs"
+      - "{{ neo4j_root }}/import:/var/lib/neo4j/import"
+      - "{{ neo4j_root }}/plugins:/plugins"
+    env:
+      NEO4J_AUTH: "neo4j/{{ lookup('password', 'tf/neo4j-pw.txt length=16 chars=ascii_letters,digits,punctuation') }}"

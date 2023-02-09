@@ -1,0 +1,21 @@
+# BBOT Training Infrastructure
+
+Your BBOT training infrastructure has been provisioned successfully. The public
+IP of your EC2 instance is `{{ ansible_host }}`. You can connect to it via SSH 
+using the following command:
+
+$ ssh -i ~/.ssh/bbotTraining ubuntu@{{ ansible_host }}
+
+Neo4J's web UI is running on port `7474`. You can access it using these
+credentials:
+
+ * Host: http://{{ ansible_host }}:7474/
+ * User: neo4j
+ * Pass: {{ lookup('password', 'tf/neo4j-pw.txt length=16 chars=ascii_letters,digits') }}
+
+When training is complete, you can tear down the AWS infrastructure using this
+command:
+
+$ ~/.local/bin/terraform -chdir={{ tf }} destroy -var-file env.tfvars -state terraform.tfstate
+
+Happy hunting!

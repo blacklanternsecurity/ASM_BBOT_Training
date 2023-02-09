@@ -1,0 +1,40 @@
+---
+- hosts: student_machine
+  connection: local
+  become: false
+  gather_facts: true
+  tags:
+    - local
+  roles:
+    - terraform_install
+
+- hosts: student_machine
+  connection: local
+  become: false
+  gather_facts: true
+  tags:
+    - local
+  roles:
+    - terraform_execute
+  post_tasks:
+    - meta: refresh_inventory
+
+- hosts: aws_hosts
+  become: true
+  gather_facts: false
+  tags:
+    - remote
+  pre_tasks:
+    - name: Wait for EC2 instance to become available
+      wait_for_connection:
+    - name: Create Ansible tmp directory
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+        mode: 0700
+        force: true
+  roles:
+    - bbot
+    - docker
+    - neo4j
+    - output
