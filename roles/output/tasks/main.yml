@@ -19,7 +19,5 @@
       {% for line in raw_lines.split('\n') %}
       {{ "{:<80}".format(line) }}
       {% endfor %}
-    output_lines: |
-      {{ padded_lines }}
   debug:
-    msg: "{{ output_lines.split('\n') }}"
+    msg: "{{ padded_lines.split('\n') }}"
