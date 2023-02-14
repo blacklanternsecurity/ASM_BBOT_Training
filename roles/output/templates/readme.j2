@@ -11,7 +11,7 @@ credentials:
 
  * Host: http://{{ ansible_host }}:7474/
  * User: neo4j
- * Pass: {{ lookup('password', 'tf/neo4j-pw.txt length=16 chars=ascii_letters,digits') }}
+ * Pass: {{ lookup('password', 'tf/neo4j-pw.txt length=25 chars=ascii_letters,digits') }}
 
 When training is complete, you can tear down the AWS infrastructure using this
 command:
