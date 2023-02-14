@@ -20,4 +20,4 @@
       - "{{ neo4j_root }}/import:/var/lib/neo4j/import"
       - "{{ neo4j_root }}/plugins:/plugins"
     env:
-      NEO4J_AUTH: "neo4j/{{ lookup('password', 'tf/neo4j-pw.txt length=16 chars=ascii_letters,digits,punctuation') }}"
+      NEO4J_AUTH: "neo4j/{{ lookup('password', 'tf/neo4j-pw.txt length=25 chars=ascii_letters,digits') }}"
