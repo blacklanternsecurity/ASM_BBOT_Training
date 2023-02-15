@@ -7,7 +7,7 @@
     block: "{{ lookup('template', 'ssh-config.j2') }}"
     path: "~/.ssh/config"
     create: yes
-    mark: "# {mark} BBOT EC2 INSTANCE"
+    marker: "# {mark} BBOT EC2 INSTANCE"
 
 - name: Generate output document
   delegate_to: localhost
