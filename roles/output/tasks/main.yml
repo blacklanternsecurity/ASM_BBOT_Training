@@ -1,4 +1,14 @@
 ---
+- name: Write SSH config
+  delegate_to: localhost
+  delegate_facts: no
+  become: false
+  blockinfile:
+    block: "{{ lookup('template', 'ssh-config.j2') }}"
+    file: "~/.ssh/config"
+    create: yes
+    mark: "# {mark} BBOT EC2 INSTANCE"
+
 - name: Generate output document
   delegate_to: localhost
   delegate_facts: no

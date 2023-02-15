@@ -6,6 +6,17 @@ using the following command:
 
 $ ssh -i ~/.ssh/bbotTraining ubuntu@{{ ansible_host }}
 
+An alias has been added to your local SSH config so you can run the following
+command instead:
+
+$ ssh bbot-ec2
+
+You can move files to the EC2 instance using either of the following SCP
+commands:
+
+$ scp -i ~/.ssh/bbotTraining file.txt ubuntu@{{ ansible_host }}:~/
+$ scp file.txt bbot-ec2:~/
+
 Neo4J's web UI is running on port `7474`. You can access it using these
 credentials:
 
