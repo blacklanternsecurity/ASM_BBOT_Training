@@ -10,18 +10,27 @@
     dest: "{{ playbook_dir }}/{{ output_file }}"
 
 - name: "Ensure BBOT secrets file exists"
+  delegate_to: localhost
+  delegate_facts: no
+  become: false
   shell:
     executable: "/usr/bin/python3"
     cmd: "from bbot.core import configurator"
     #creates: "{{ secrets_yml }}"
 
 - name: "Ensure output_modules exists in secrets.yml"
+  delegate_to: localhost
+  delegate_facts: no
+  become: false
   lineinfile:
     path: "{{ secrets_yml }}"
     regexp: "^#*\\s*output_modules:"
     line: "output_modules:"
 
 - name: "Insert neo4j output module into config"
+  delegate_to: localhost
+  delegate_facts: no
+  become: false
   replace:
     path: "{{ secrets_yml }}"
     vars:
