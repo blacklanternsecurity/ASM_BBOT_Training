@@ -1,4 +1,4 @@
-'---
+---
 - hosts: student_machine
   connection: local
   become: false
