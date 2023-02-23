@@ -9,10 +9,12 @@
 # This is separate from the pip task that follows to limit
 # potential for a deadlock on CPU-limited EC2 instances
 - name: Install pip dependencies
+  become: false
   pip:
     name: "ansible=={{ ansible_vers }}"
 
 - name: Install BBOT Python module
   tags: point
+  become: false
   pip:
     name: "bbot"
