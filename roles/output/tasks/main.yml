@@ -44,6 +44,12 @@
         \1  username: "neo4j"
         \1  password: "{{ lookup('password', 'tf/neo4j-pw.txt length=25 chars=ascii_letters,digits') }}"
 
+- name: "Update PATH for Ansible"
+  become: false
+  lineinfile:
+    dest: /home/ubuntu/.bashrc
+    line: "export PATH={{ ansible_path }}:$PATH"
+
 - name: Provisioned successfully
   delegate_to: localhost
   delegate_facts: no

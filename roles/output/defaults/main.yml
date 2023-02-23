@@ -1,3 +1,4 @@
 ---
 output_file: "bbot-setup-readme.md"
 secrets_yml: "/home/ubuntu/.config/bbot/secrets.yml"
+ansible_path: "/home/ubuntu/.local/bin"

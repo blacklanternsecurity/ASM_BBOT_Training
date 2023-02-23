@@ -18,3 +18,10 @@
   become: false
   pip:
     name: "bbot"
+
+- name: Export "PYTHONPATH"
+  become: false
+  lineinfile:
+    dest: /home/ubuntu/.bashrc
+    line: "export PYTHONPATH=python_path"
+  
