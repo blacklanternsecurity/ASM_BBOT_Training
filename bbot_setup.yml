@@ -1,4 +1,4 @@
----
+'---
 - hosts: student_machine
   connection: local
   become: false
@@ -7,6 +7,15 @@
     - local
   roles:
     - terraform_install
+
+- hosts: student_machine
+  connection: local
+  become: false
+  gather_facts: true
+  tags:
+    - local
+  roles:
+    - ansible
 
 - hosts: student_machine
   connection: local

@@ -23,5 +23,5 @@
   become: false
   lineinfile:
     dest: /home/ubuntu/.bashrc
-    line: "export PYTHONPATH=python_path"
+    line: "export PYTHONPATH={{ python_path }}"
   

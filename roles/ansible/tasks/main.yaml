@@ -1,0 +1,6 @@
+---
+- name: "Update PATH for Ansible"
+  become: false
+  lineinfile:
+    dest: /home/{{ ansible_user_id }}/.bashrc
+    line: "export PATH={{ ansible_path }}:$PATH"
