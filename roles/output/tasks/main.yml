@@ -16,7 +16,7 @@
   shell:
     executable: "/usr/bin/python3"
     cmd: "from bbot.core import configurator"
-    #creates: "{{ secrets_yml }}"
+    creates: "{{ secrets_yml }}"
 
 - name: "Ensure output_modules exists in secrets.yml"
   delegate_to: localhost
