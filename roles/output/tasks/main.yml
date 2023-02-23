@@ -24,11 +24,11 @@
     line: "output_modules:"
 
 - name: "Insert neo4j output module into config"
+  vars:
+    tf: "{{ playbook_dir }}/tf/"
   become: false
   replace:
     path: "{{ secrets_yml }}"
-    vars:
-      tf: "{{ playbook_dir }}/tf/"
     regexp: |-
       #* ?(  )neo4j:
       #* ?    username:.*
