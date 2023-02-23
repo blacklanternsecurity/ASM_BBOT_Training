@@ -3,6 +3,9 @@
 # [-] References
 # 1. arg_parser code taken from --> https://www.redhat.com/sysadmin/ansible-dynamic-inventory-python
 
+# [-] Notes
+# 1. The script MUST be able to process the --list command line argument
+
 
 import os
 import argparse

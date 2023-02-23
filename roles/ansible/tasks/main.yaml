@@ -1,4 +1,6 @@
 ---
+# This will allow the student to more easily execute ansible in the event they need to
+# re-run all or part of the playbook
 - name: "Update PATH for Ansible"
   become: false
   lineinfile:

@@ -13,12 +13,16 @@
   pip:
     name: "ansible=={{ ansible_vers }}"
 
+# Install as the unprivileged ubuntu user on the EC2 instance
 - name: Install BBOT Python module
   tags: point
   become: false
   pip:
     name: "bbot"
 
+# This ensures that Python will know where to find the bbot module
+# The output module will later call BBOT functions in order to create the secrets.yml file on the EC2 instance
+# PYTHONPATH is used to locate the BBOT module
 - name: Export "PYTHONPATH"
   become: false
   lineinfile:
