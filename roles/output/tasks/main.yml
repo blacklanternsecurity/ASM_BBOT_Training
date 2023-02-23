@@ -1,4 +1,14 @@
 ---
+- name: "Generate output document"
+  delegate_to: localhost
+  delegate_facts: no
+  become: false
+  vars:
+    tf: "{{ playbook_dir }}/tf/"
+  template:
+    src: "readme.j2"
+    dest: "{{ playbook_dir }}/{{ output_file }}"
+
 - name: "Ensure BBOT secrets file exists"
   shell:
     executable: "/usr/bin/python3"
@@ -24,16 +34,6 @@
         \1neo4j:
         \1  username: "neo4j"
         \1  password: "{{ lookup('password', 'tf/neo4j-pw.txt length=25 chars=ascii_letters,digits') }}"
-
-- name: Generate output document
-  delegate_to: localhost
-  delegate_facts: no
-  become: false
-  vars:
-    tf: "{{ playbook_dir }}/tf/"
-  template:
-    src: "readme.j2"
-    dest: "{{ playbook_dir }}/{{ output_file }}"
 
 - name: Provisioned successfully
   delegate_to: localhost
