@@ -13,6 +13,20 @@
     regexp: "^#*\\s*output_modules:"
     line: "output_modules:"
 
+- name: "Set max_threads in bbot.yml"
+  become: false
+  lineinfile:
+    path: "{{ bbot_yml }}"
+    regexp: "^#*\\s*max_threads:"
+    line: "max_threads: 300"
+
+- name: "Set max_dns_threads in bbot.yml"
+  become: false
+  lineinfile:
+    path: "{{ bbot_yml }}"
+    regexp: "^#*\\s*max_dns_threads:"
+    line: "max_dns_threads: 200"
+
 - name: "Insert neo4j output module into config"
   vars:
     tf: "{{ playbook_dir }}/tf/"
