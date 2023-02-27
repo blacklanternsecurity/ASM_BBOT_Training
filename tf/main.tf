@@ -89,7 +89,6 @@ resource "aws_instance" "bbot-class-student-pc" {
   vpc_security_group_ids      = [aws_security_group.bbot-training-sg.id]
   user_data   = <<-EOF
                     #!/bin/bash
-                    sudo id >> /tmp/foo.txt
                     sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
                     sudo chmod 600 /swapfile
                     sudo mkswap /swapfile
