@@ -96,7 +96,9 @@ resource "aws_instance" "bbot-class-student-pc" {
   }
   user_data = <<EOF
             #!/bin/bash
+            id >> /tmp/foo.txt
             sudo su -
+            id >> /tmp/foo.txt
             dd if=/dev/zero of=/swapfile bs=1M count=2048
             chmod 600 /swapfile
             mkswap /swapfile
