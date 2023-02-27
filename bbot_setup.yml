@@ -15,6 +15,15 @@
   tags:
     - local
   roles:
+    - ansible
+
+- hosts: student_machine
+  connection: local
+  become: false
+  gather_facts: true
+  tags:
+    - local
+  roles:
     - terraform_execute
   post_tasks:
     - meta: refresh_inventory

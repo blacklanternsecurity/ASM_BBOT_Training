@@ -1,5 +1,34 @@
 ---
-- name: Generate output document
+- name: "Ensure BBOT secrets file exists"
+  become: false
+  shell:
+    executable: "/usr/bin/python3"
+    cmd: "from bbot.core import configurator"
+    creates: "{{ secrets_yml }}"
+
+- name: "Ensure output_modules exists in secrets.yml"
+  become: false
+  lineinfile:
+    path: "{{ secrets_yml }}"
+    regexp: "^#*\\s*output_modules:"
+    line: "output_modules:"
+
+- name: "Insert neo4j output module into config"
+  vars:
+    tf: "{{ playbook_dir }}/tf/"
+  become: false
+  replace:
+    path: "{{ secrets_yml }}"
+    regexp: |-
+      #* ?(  )neo4j:
+      #* ?    username:.*
+      #* ?    password:.*
+    replace: |-
+        \1neo4j:
+        \1  username: "neo4j"
+        \1  password: "{{ lookup('password', 'tf/neo4j-pw.txt length=25 chars=ascii_letters,digits') }}"
+
+- name: "Generate output document"
   delegate_to: localhost
   delegate_facts: no
   become: false
