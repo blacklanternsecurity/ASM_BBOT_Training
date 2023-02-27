@@ -97,7 +97,7 @@ resource "aws_instance" "bbot-class-student-pc" {
             sudo mkswap /swapfile
             sudo swapon /swapfile
             echo "/swapfile swap swap defaults 0 0" | sudo tee /etc/fstab
-            EOF
+  EOF
 
   root_block_device {
     delete_on_termination = true
