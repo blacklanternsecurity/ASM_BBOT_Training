@@ -96,13 +96,14 @@ resource "aws_instance" "bbot-class-student-pc" {
   }
   user_data = <<EOF
             #!/bin/bash
+            sudo su -
             dd if=/dev/zero of=/swapfile bs=1M count=2048
             chmod 600 /swapfile
             mkswap /swapfile
             swapon /swapfile
             echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
             EOF
-            
+
   tags = {
     Name        = "BBOT"
     Environment = "TRAINING"
