@@ -1,3 +1,4 @@
 ---
 output_file: "bbot-setup-readme.md"
 secrets_yml: "/home/ubuntu/.config/bbot/secrets.yml"
+bbot_yml: "/home/ubuntu/.config/bbot/bbot.yml"

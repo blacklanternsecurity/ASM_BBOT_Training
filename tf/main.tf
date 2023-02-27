@@ -87,6 +87,14 @@ resource "aws_instance" "bbot-class-student-pc" {
   associate_public_ip_address = lookup(var.awsprops, "publicip")
   key_name                    = lookup(var.awsprops, "keyname")
   vpc_security_group_ids      = [aws_security_group.bbot-training-sg.id]
+  user_data   = <<-EOF
+                    #!/bin/bash
+                    sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+                    sudo chmod 600 /swapfile
+                    sudo mkswap /swapfile
+                    sudo swapon /swapfile
+                    echo "/swapfile swap swap defaults 0 0" | sudo tee /etc/fstab
+                EOF
 
   root_block_device {
     delete_on_termination = true
@@ -94,6 +102,8 @@ resource "aws_instance" "bbot-class-student-pc" {
     volume_size           = 50
     volume_type           = "gp2"
   }
+
+
   tags = {
     Name        = "BBOT"
     Environment = "TRAINING"
