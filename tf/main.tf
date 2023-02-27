@@ -93,7 +93,7 @@ resource "aws_instance" "bbot-class-student-pc" {
     //iops                  = 150
     volume_size           = 50
     volume_type           = "gp2"
-  
+  }
   user_data = <<EOF
             #!/bin/bash
             dd if=/dev/zero of=/swapfile bs=1M count=2048
@@ -102,7 +102,7 @@ resource "aws_instance" "bbot-class-student-pc" {
             swapon /swapfile
             echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
             EOF
-  }
+            
   tags = {
     Name        = "BBOT"
     Environment = "TRAINING"
