@@ -1,0 +1,7 @@
+---
+- name: Install nmap package
+  package:
+    name:
+      - nmap
+    state: latest
+    update_cache: yes
