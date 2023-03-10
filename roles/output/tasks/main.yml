@@ -3,7 +3,7 @@
   become: false
   shell:
     executable: "/usr/bin/python3"
-    cmd: "from bbot.core import configurator"
+    cmd: "from bbot.core.configurator import ensure_config_files; ensure_config_files()"
     creates: "{{ secrets_yml }}"
 
 - name: "Ensure output_modules exists in secrets.yml"
