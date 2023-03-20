@@ -1,0 +1,20 @@
+---
+- name: Download VSCode archive
+  get_url:
+    url: "{{ vscode_url }}"
+    dest: /tmp/vscode.tar.gz
+    checksum: "sha256:{{ vscode_hash }}"
+
+- name: Unpack archive
+  shell:
+    cmd: "tar -xvf /tmp/vscode.tar.gz -C ~/.local/"
+    creates: "~/.local/VSCode-linux-x64"
+
+- name: Set permissions on vscode binary
+  file:
+    path: "~/.local/VSCode-linux-x64/bin/code"
+    mode: 0755
+
+- name: Create Sym Link
+  shell:
+    cmd: "ln -s ~/.local/VSCode-linux-x64/bin/code ~/.local/bin/code"
