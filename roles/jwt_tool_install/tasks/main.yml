@@ -1,0 +1,22 @@
+---
+# Using uri module + python's ziptool to avoid introducing unzip dependency
+- name: Download JWT Tool archive
+  get_url:
+    url: "{{ jwt_url }}"
+    dest: /tmp/jwt_tool.zip
+
+- name: Unpack JWT archive
+  shell:
+    cmd: "/usr/bin/python3 -m zipfile -e /tmp/jwt_tool.zip ~/"
+    creates: "~/jwt_tool"
+
+# This is separate from the pip task that follows to limit
+# potential for a deadlock on CPU-limited EC2 instances
+- name: Install pip dependencies
+  become: false
+  pip:
+    name:
+      - termcolor
+      - cprint
+      - pycryptodomex
+      - requests
