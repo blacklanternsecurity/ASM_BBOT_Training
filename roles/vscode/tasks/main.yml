@@ -18,3 +18,4 @@
 - name: Create Sym Link
   shell:
     cmd: "ln -s ~/.local/VSCode-linux-x64/bin/code ~/.local/bin/code"
+  ignore_errors: true
