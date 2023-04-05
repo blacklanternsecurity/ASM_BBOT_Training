@@ -38,6 +38,8 @@
 - hosts: student_machine
   connection: local
   become: true
+  become_user: root
+  become_method: sudo
   gather_facts: true
   tags:
     - local

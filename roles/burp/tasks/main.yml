@@ -3,8 +3,11 @@
 - name: Download Burpsuite
   get_url:
     url: "{{ burp_url }}"
-    dest: ~/
+    dest: "/tmp/burp-install.sh"
+    mode: 0755
+    checksum: "sha256:{{ burp_hash }}"
 
+#Execute Script
 - name: execute installation script
   shell:
-    cmd: "sudo bash ~/burpsuite_community_linux_v2023_2_4.sh"
+    cmd: "sudo bash /tmp/burp-install.sh"
