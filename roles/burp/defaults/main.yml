@@ -1,3 +1,6 @@
 ---
-burp_url: "http://bbot.training/materials/burpsuite_community_linux_v2023_2_4.sh"
+burp_url: "https://portswigger-cdn.net/burp/releases/download?product=pro&version=&type=Linux"
 burp_hash: "182392523f159e7db7611f9f5ff0006d80bcd7a35549403eb5068486d3dca0ce"
+burp_user: "ubuntu"
+burp_group: "ubuntu"
+burp_dir: "/opt/BurpSuite"

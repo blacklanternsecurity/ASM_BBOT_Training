@@ -1,13 +1,27 @@
 ---
-# Download BurpSuite Installer from bbot.training
-- name: Download Burpsuite
+- name: "Download Burpsuite"
   get_url:
     url: "{{ burp_url }}"
     dest: "/tmp/burp-install.sh"
     mode: 0755
     checksum: "sha256:{{ burp_hash }}"
 
-#Execute Script
-- name: execute installation script
+- name: "Configure varfile"
+  template:
+    src: "varfile.j2"
+    dest: "/tmp/burp.varfile"
+
+- name: "Create install directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ burp_user }}"
+    group: "{{ burp_group }}"
+    mode: 0755
+  with_items:
+    - "{{ burp_dir }}"
+    - "~{{ burp_user }}/.BurpSuite"
+
+- name: "Execute Installation Script"
   shell:
-    cmd: "sudo bash /tmp/burp-install.sh"
+    cmd: "sudo bash /tmp/burp-install.sh -q -varfile /tmp/burp.varfile"
