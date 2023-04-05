@@ -77,4 +77,4 @@ set -u
 
 # ============ ANSIBLE PLAYBOOK ============
 
-ansible-playbook -i "${ANS_L}/inventory" "${ANS_L}/bbot_setup.yml"
+ansible-playbook -i "${ANS_L}/inventory" "${ANS_L}/bbot_setup.yml" -K
