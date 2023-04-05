@@ -1,0 +1,10 @@
+---
+# Download BurpSuite Installer from bbot.training
+- name: Download Burpsuite
+  get_url:
+    url: "{{ burp_url }}"
+    dest: ~/
+
+- name: execute installation script
+  shell:
+    cmd: "sudo bash ~/burpsuite_community_linux_v2023_2_4.sh"
