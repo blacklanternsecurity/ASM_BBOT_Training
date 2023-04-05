@@ -11,17 +11,6 @@
     src: "varfile.j2"
     dest: "/tmp/burp.varfile"
 
-- name: "Create install directory"
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ burp_user }}"
-    group: "{{ burp_group }}"
-    mode: 0755
-  with_items:
-    - "{{ burp_dir }}"
-    - "~{{ burp_user }}/.BurpSuite"
-
 - name: "Execute Installation Script"
   shell:
     cmd: "sudo bash /tmp/burp-install.sh -q -varfile /tmp/burp.varfile"
