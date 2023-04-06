@@ -10,7 +10,15 @@
   tags:
     - burp
   file:
-    path: "~/burp"
+    path: "{{ ansible_user_dir }}/.burp"
+    state: directory
+    mode: 0755
+
+- name: "Create symlink directory"
+  tags:
+    - burp
+  file:
+    path: "{{ ansible_user_dir }}/.local/bin"
     state: directory
     mode: 0755
 
