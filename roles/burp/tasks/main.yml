@@ -21,4 +21,4 @@
 
 - name: "Execute Installation Script"
   shell:
-    cmd: "sudo bash /tmp/burp-install.sh -q -varfile /tmp/burp.varfile"
+    cmd: "bash /tmp/burp-install.sh -q -varfile /tmp/burp.varfile"
