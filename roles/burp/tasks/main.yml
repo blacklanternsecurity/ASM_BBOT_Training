@@ -6,6 +6,14 @@
     mode: 0755
     checksum: "sha256:{{ burp_hash }}"
 
+- name: "Create install directory"
+  tags:
+    - burp
+  file:
+    path: "~/burp"
+    state: directory
+    mode: 0755
+
 - name: "Configure varfile"
   template:
     src: "varfile.j2"
