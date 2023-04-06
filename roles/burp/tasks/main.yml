@@ -1,0 +1,32 @@
+---
+- name: "Download Burpsuite"
+  get_url:
+    url: "{{ burp_url }}"
+    dest: "/tmp/burp-install.sh"
+    mode: 0755
+    checksum: "sha256:{{ burp_hash }}"
+
+- name: "Create install directory"
+  tags:
+    - burp
+  file:
+    path: "{{ ansible_user_dir }}/.burp"
+    state: directory
+    mode: 0755
+
+- name: "Create symlink directory"
+  tags:
+    - burp
+  file:
+    path: "{{ ansible_user_dir }}/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: "Configure varfile"
+  template:
+    src: "varfile.j2"
+    dest: "/tmp/burp.varfile"
+
+- name: "Execute Installation Script"
+  shell:
+    cmd: "bash /tmp/burp-install.sh -q -varfile /tmp/burp.varfile"
