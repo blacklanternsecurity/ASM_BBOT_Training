@@ -17,14 +17,14 @@
   roles:
     - ansible
 
-- hosts: student_machine
-  connection: local
-  become: false
-  gather_facts: true
-  tags:
-    - local
-  roles:
-    - vscode
+# - hosts: student_machine
+#   connection: local
+#   become: false
+#   gather_facts: true
+#   tags:
+#     - local
+#   roles:
+#     - vscode
 
 - hosts: student_machine
   connection: local
@@ -35,14 +35,14 @@
   roles:
     - jwt_tool_install
 
-- hosts: student_machine
-  connection: local
-  become: false
-  gather_facts: true
-  tags:
-    - local
-  roles:
-    - burp
+# - hosts: student_machine
+#   connection: local
+#   become: false
+#   gather_facts: true
+#   tags:
+#     - local
+#   roles:
+#     - burp
 
 - hosts: student_machine
   connection: local
